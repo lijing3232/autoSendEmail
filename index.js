@@ -13,8 +13,6 @@ dayjs.extend(timezone);
 const {
   fromDisplayText,
   fromDisplaySubText,
-  user,
-  to,
   weatherKey,
   location,
   type,
@@ -55,7 +53,7 @@ async function init() {
     // 发送邮件;
     sendEmail({
       from: fromDisplayText,
-      to,
+      process.env.to,
       subject: fromDisplaySubText,
       html: htmlStr,
     });
@@ -63,7 +61,7 @@ async function init() {
     // 发送邮件给自己提示
     sendEmail({
       from: '报错啦',
-      to: user,
+      to: process.env.user,
       subject: '定时邮件-报错提醒',
       html: '请查看github actions',
     });
