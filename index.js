@@ -6,6 +6,10 @@ const timezone = require('dayjs/plugin/timezone');
 const sendEmail = require('./sendEmail');
 const emailHtml = require('./emailHtml');
 
+const [user, pass, to] = process.argv.slice(2);
+process.env.user = user;
+process.env.pass = pass;
+
 // 给dayjs添加时区选项
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -53,7 +57,7 @@ async function init() {
     // 发送邮件;
     sendEmail({
       from: fromDisplayText,
-      process.env.to,
+      to,
       subject: fromDisplaySubText,
       html: htmlStr,
     });
